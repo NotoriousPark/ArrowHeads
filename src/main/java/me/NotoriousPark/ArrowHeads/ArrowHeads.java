@@ -1,5 +1,7 @@
 package me.NotoriousPark.ArrowHeads;
 
+import me.NotoriousPark.ArrowHeads.command.ArrowHeadsCommand;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,8 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 public class ArrowHeads extends JavaPlugin {
     FileConfiguration config = this.getConfig();
@@ -21,6 +23,9 @@ public class ArrowHeads extends JavaPlugin {
     private String prefix;
 
     private boolean arrowheads = false;
+    private String[] arrowTypes = {ChatColor.WHITE + "Normal Arrows", ChatColor.GREEN + "Poison Arrows", ChatColor.GRAY + "Weakness Arrows", ChatColor.BLACK + "Slowness Arrows"};
+    private ItemStack[] arrowItems = {new ItemStack(Material.ARROW, 1), setItemName(new ItemStack(Material.ARROW, 1), "Poison Arrow"), setItemName(new ItemStack(Material.ARROW, 1), "Weakness Arrow"), setItemName(new ItemStack(Material.ARROW, 1), "Slowness Arrow")};
+
     private final ShapelessRecipe QUIVER;
     private final ShapedRecipe POISONARROW;
     private final ShapedRecipe WEAKNESSARROW;
@@ -56,6 +61,7 @@ public class ArrowHeads extends JavaPlugin {
     }
 
     public void registerCommands() {
+        getCommand("arrowheads").setExecutor(new ArrowHeadsCommand(this));
     }
 
     public void registerListeners() {
@@ -125,5 +131,13 @@ public class ArrowHeads extends JavaPlugin {
 
     public boolean getStatus() {
         return arrowheads;
+    }
+
+    public String[] getArrowType() {
+        return arrowTypes;
+    }
+
+    public ItemStack[] getArrowItems() {
+        return arrowItems;
     }
 }

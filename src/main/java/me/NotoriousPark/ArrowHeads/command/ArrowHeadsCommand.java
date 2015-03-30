@@ -25,7 +25,7 @@ public class ArrowHeadsCommand extends ArrowHeads implements CommandExecutor {
                 return false;
             } else {
                 setStatus(true);
-                broadcast(getTextId() + "Arrow Heads " + ChatColor.DARK_GREEN + "ENABLED" + getTextId()" !");
+                broadcast(getTextId() + "Arrow Heads " + ChatColor.DARK_GREEN + "ENABLED" + getTextId() + " !");
                 playsound(Sound.NOTE_PIANO);
                 return true;
             }
